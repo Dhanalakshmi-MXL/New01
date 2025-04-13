@@ -1,0 +1,55 @@
+# Base class
+class Book:
+    def __init__(self, title, author, isbn):
+        self.__title = title
+        self.__author = author
+        self.__isbn = isbn
+
+    def get_details(self):
+        return f"Title: {self.__title}, Author: {self.__author}, ISBN: {self.__isbn}"
+
+# Derived class
+class EBook(Book):
+    def __init__(self, title, author, isbn, file_size):
+        super().__init__(title, author, isbn)
+        self.__file_size = file_size
+
+    def get_details(self):
+        return f"{super().get_details()}, File Size: {self.__file_size}MB"
+
+# Another derived class
+class PrintedBook(Book):
+    def __init__(self, title, author, isbn, pages):
+        super().__init__(title, author, isbn)
+        self.__pages = pages
+
+    def get_details(self):
+        return f"{super().get_details()}, Pages: {self.__pages}"
+
+# Polymorphism in action
+def print_book_details(book):
+    print(book.get_details())
+
+# Encapsulation and abstraction
+class Library:
+    def __init__(self):
+        self.__books = []
+
+    def add_book(self, book):
+        self.__books.append(book)
+
+    def show_books(self):
+        for book in self.__books:
+            print_book_details(book)
+
+# Creating objects
+ebook = EBook("Digital Fortress", "Dan Brown", "1234567890", 5)
+printed_book = PrintedBook("Inferno", "Dan Brown", "0987654321", 480)
+
+# Using the Library class
+library = Library()
+library.add_book(ebook)
+library.add_book(printed_book)
+
+# Displaying book details
+library.show_books()
